@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Thumbnail Grammatik-Pro</title>
+  <desc id="desc">Auszeichnungsartige Komposition mit Präzisionsringen und sauber gesetzten Achsen.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eee4d7"/>
+      <stop offset="100%" stop-color="#b8cad2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <rect x="102" y="96" width="996" height="483" rx="30" fill="#fffaf4" stroke="#c8d3d8"/>
+  <circle cx="600" cy="300" r="150" fill="none" stroke="#22577a" stroke-width="14"/>
+  <circle cx="600" cy="300" r="108" fill="none" stroke="#c56a30" stroke-width="10"/>
+  <circle cx="600" cy="300" r="66" fill="#e9f3e2" stroke="#2f8f57" stroke-width="8"/>
+  <path d="M600 134V122" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M600 478V466" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M434 300H422" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M778 300H766" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M486 186L476 176" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M714 414L724 424" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M714 186L724 176" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <path d="M486 414L476 424" stroke="#7d3e21" stroke-width="12" stroke-linecap="round"/>
+  <rect x="256" y="466" width="688" height="46" rx="14" fill="#ddeaf4"/>
+  <text x="142" y="164" fill="#7d3e21" font-size="62" font-family="Georgia, serif">Grammatik-Pro</text>
+  <text x="142" y="214" fill="#5d6468" font-size="28" font-family="Avenir Next, Arial, sans-serif">Grenzfälle begründen · Regelwissen präzise anwenden</text>
+</svg>

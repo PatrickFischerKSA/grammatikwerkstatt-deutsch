@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Thumbnail Adlerauge</title>
+  <desc id="desc">Konzentriertes Auge mit scharfer Geometrie für das höchste Präzisionsniveau.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e9dfd2"/>
+      <stop offset="100%" stop-color="#adc4cd"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <rect x="96" y="90" width="1008" height="495" rx="32" fill="#fffaf4" stroke="#c2d0d5"/>
+  <path d="M176 338C296 200 430 150 600 150S904 200 1024 338C904 476 770 526 600 526S296 476 176 338Z" fill="none" stroke="#22577a" stroke-width="16"/>
+  <ellipse cx="600" cy="338" rx="170" ry="132" fill="#e7f1df" stroke="#2f8f57" stroke-width="10"/>
+  <circle cx="600" cy="338" r="84" fill="#22577a"/>
+  <circle cx="600" cy="338" r="34" fill="#fffaf4"/>
+  <circle cx="630" cy="304" r="16" fill="#fffaf4" opacity=".82"/>
+  <path d="M250 178C340 120 454 90 600 90S860 120 950 178" fill="none" stroke="#c56a30" stroke-width="10" stroke-linecap="round"/>
+  <path d="M250 498C340 556 454 586 600 586S860 556 950 498" fill="none" stroke="#c56a30" stroke-width="10" stroke-linecap="round" opacity=".72"/>
+  <text x="140" y="166" fill="#7d3e21" font-size="64" font-family="Georgia, serif">Adlerauge</text>
+  <text x="140" y="216" fill="#5d6468" font-size="28" font-family="Avenir Next, Arial, sans-serif">höchste Präzision · subtile Fehler ohne Hilfssignale erkennen</text>
+</svg>

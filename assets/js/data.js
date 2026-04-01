@@ -748,8 +748,705 @@
       ]
     },
     {
-      id: "profi",
+      id: "fortgeschritten",
       rank: "03",
+      title: "Fortgeschritten",
+      subtitle: "Strukturen gezielt durchschauen",
+      description:
+        "Längere Satzgefüge mit mehreren plausiblen Lesarten, feineren Rektionen und klarer Progression zwischen Erkennen und Begründen.",
+      modules: [
+        {
+          id: "satzbezug",
+          title: "Satzbezüge",
+          summary: "Mehrdeutige Bezüge in längeren Strukturen präzisieren.",
+          tasks: [
+            choice({
+              id: "fg-sb-1",
+              title: "Wer verschob die Probe?",
+              prompt: "Welche Fassung macht klar, dass die Chorleiterin die Probe verschob?",
+              context:
+                "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, verschob sie die Probe auf Freitag.",
+              options: [
+                {
+                  id: "a",
+                  label: "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, verschob die Chorleiterin die Probe auf Freitag."
+                },
+                {
+                  id: "b",
+                  label: "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, verschob diese die Probe auf Freitag."
+                },
+                {
+                  id: "c",
+                  label: "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, verschob jene die Probe auf Freitag."
+                },
+                {
+                  id: "d",
+                  label: "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, wurde die Probe von ihr auf Freitag verschoben."
+                }
+              ],
+              correctOptionId: "a",
+              hint: "Achte darauf, welche Person die Handlung ausführt.",
+              solution:
+                "Nachdem die Chorleiterin mit der Solistin gesprochen hatte, verschob die Chorleiterin die Probe auf Freitag.",
+              explanation:
+                "Das Pronomen 'sie' erlaubt zwei Lesarten. Erst die Wiederholung des Bezugsworts weist die Handlung eindeutig der Chorleiterin zu.",
+              visual: visualBezug("die Chorleiterin", "sie", "die Solistin", "handelnde Person eindeutig benennen")
+            }),
+            drag({
+              id: "fg-sb-2",
+              title: "Bezug und Fehlbezug zuordnen",
+              prompt: "Ordne dem Pronomen den gemeinten und den nur naheliegenden Bezug zu.",
+              context:
+                "Die Archivarin erklärte der Volontärin, dass sie die Notizen noch einmal ordnen müsse.",
+              slots: [
+                { id: "meant", label: "Gemeint mit 'sie'" },
+                { id: "tempting", label: "Naheliegender Fehlbezug" }
+              ],
+              options: [
+                { id: "o1", label: "die Volontärin", detail: "gemeinte Person" },
+                { id: "o2", label: "die Archivarin", detail: "formal ebenfalls möglich" },
+                { id: "o3", label: "die Notizen", detail: "Sachwort" },
+                { id: "o4", label: "das Archiv", detail: "Distraktor" }
+              ],
+              correctMap: { meant: "o1", tempting: "o2" },
+              hint: "Trenne gemeinte Aufgabe und bloß formale Anschlussmöglichkeit.",
+              solution: "Gemeint ist die Volontärin; die Archivarin bleibt der naheliegende Fehlbezug.",
+              explanation:
+                "Beide Personen sind feminin und grammatisch anschließbar. Die Satzabsicht verlangt hier aber die Volontärin als Adressatin der Aufgabe.",
+              visual: visualBezug("die Volontärin", "sie", "die Archivarin", "logischen Bezug vom formalen unterscheiden")
+            }),
+            text({
+              id: "fg-sb-3",
+              title: "Relativanschluss klären",
+              prompt: "Ersetze nur den problematischen Anschluss so, dass sich der Satz eindeutig auf den Bericht bezieht.",
+              context: "Die Redakteurin strich den Kommentar zum Bericht, der erneut geprüft werden müsse.",
+              inputLabel: "Korrigierter Anschluss",
+              expectedAnswers: ["der erneut geprüft werden müsse"],
+              acceptedAnswers: [
+                "der erneut geprüft werden müsse",
+                "und dieser müsse erneut geprüft werden"
+              ],
+              hint: "Frage dich, was geprüft werden soll.",
+              solution: "der erneut geprüft werden müsse",
+              explanation:
+                "Geprüft werden soll der Bericht, nicht der Kommentar. Darum muss der Relativanschluss den Bericht als Bezugswort markieren.",
+              visual: visualBezug("den Bericht", "der", "den Kommentar", "Relativsatz an das gemeinte Nomen anschliessen")
+            })
+          ]
+        },
+        {
+          id: "kongruenz",
+          title: "Satzkongruenz",
+          summary: "Kongruenz auch bei erweiterten und konkurrierenden Subjekten sichern.",
+          tasks: [
+            choice({
+              id: "fg-ko-1",
+              title: "Kernsubjekt mit Genitivzusatz",
+              prompt: "Welche Verbform passt?",
+              context: "Der Hinweis auf die Beispiele aus dem letzten Kapitel ___ für die Lernenden besonders hilfreich.",
+              options: [
+                { id: "a", label: "ist" },
+                { id: "b", label: "sind" },
+                { id: "c", label: "war" },
+                { id: "d", label: "seien" }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe, welches Wort die Satzmitte bildet.",
+              solution: "ist",
+              explanation:
+                "Kern des Subjekts ist 'der Hinweis'. Die Beispiele stehen nur im Präpositionalzusatz und bestimmen die Verbform nicht.",
+              visual: visualKongruenz("der Hinweis", "ist", "sind", "Kernsubjekt statt Ergänzung prüfen")
+            }),
+            text({
+              id: "fg-ko-2",
+              title: "Sowohl-als-auch im Plural",
+              prompt: "Setze die richtige Verbform ein.",
+              context: "Sowohl die Einleitung als auch der Schluss ___ noch einmal überarbeitet worden.",
+              expectedAnswers: ["sind"],
+              hint: "Prüfe, ob die beiden Teile zusammen ein Pluralsubjekt bilden.",
+              solution: "sind",
+              explanation:
+                "Die Verbindung 'sowohl ... als auch' fasst beide Nominalgruppen zusammen. Deshalb steht das Verb im Plural.",
+              visual: visualKongruenz("Einleitung + Schluss", "sind", "ist", "verbundene Satzteile ergeben Plural")
+            }),
+            drag({
+              id: "fg-ko-3",
+              title: "Kongruenz in zwei Teilsätzen",
+              prompt: "Ordne die passenden Verbformen den beiden Sätzen zu.",
+              context:
+                "Der Plan mit den Ergänzungen ___ bereits freigegeben, doch die zusätzlichen Hinweise ___ noch im Entwurf.",
+              slots: [
+                { id: "first", label: "Verb zu 'der Plan'" },
+                { id: "second", label: "Verb zu 'die Hinweise'" }
+              ],
+              options: [
+                { id: "o1", label: "ist", detail: "Singular" },
+                { id: "o2", label: "sind", detail: "Plural" },
+                { id: "o3", label: "war", detail: "falsches Tempus" },
+                { id: "o4", label: "bleibt", detail: "Distraktor" }
+              ],
+              correctMap: { first: "o1", second: "o2" },
+              hint: "Untersuche beide Subjekte getrennt.",
+              solution:
+                "Der Plan mit den Ergänzungen ist bereits freigegeben, doch die zusätzlichen Hinweise sind noch im Entwurf.",
+              explanation:
+                "'Der Plan' ist Singular, 'die Hinweise' stehen im Plural. Jede Verbform richtet sich nach ihrem eigenen Subjekt.",
+              visual: visualKongruenz("der Plan / die Hinweise", "ist / sind", "ist / ist", "beide Teilsätze getrennt prüfen")
+            })
+          ]
+        },
+        {
+          id: "verbformen",
+          title: "Verbformen",
+          summary: "Verbformen über Zeitstufen und Modus hinweg sauber wählen.",
+          tasks: [
+            choice({
+              id: "fg-vf-1",
+              title: "Vorzeitigkeit im Nebensatz",
+              prompt: "Welche Form passt in den Satz?",
+              context: "Nachdem der Ausschuss die Einwände ___, veröffentlichte er die Stellungnahme.",
+              options: [
+                { id: "a", label: "geprüft hatte" },
+                { id: "b", label: "prüfte" },
+                { id: "c", label: "prüfen würde" },
+                { id: "d", label: "geprüft hat" }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe, welche Handlung zuerst abgeschlossen war.",
+              solution: "geprüft hatte",
+              explanation:
+                "Die Prüfung der Einwände geschah vor der Veröffentlichung. Diese Vorzeitigkeit wird hier mit Plusquamperfekt markiert.",
+              visual: visualVerb("zeitlich früher", "geprüft hatte", "geprüfte", "Vorzeitigkeit sprachlich sichtbar machen")
+            }),
+            text({
+              id: "fg-vf-2",
+              title: "Konjunktiv in indirekter Rede",
+              prompt: "Setze die passende Verbform ein.",
+              context: "Die Sprecherin erklärte, der Bericht ___ noch nicht vollständig.",
+              expectedAnswers: ["sei"],
+              hint: "Achte auf den Modus der wiedergegebenen Aussage.",
+              solution: "sei",
+              explanation:
+                "Die Aussage wird indirekt wiedergegeben. Daher ist der Konjunktiv I 'sei' die passende Form.",
+              visual: visualVerb("indirekte Rede", "sei", "ist", "Distanz mit Konjunktiv markieren")
+            }),
+            drag({
+              id: "fg-vf-3",
+              title: "Bedingung und Folge",
+              prompt: "Ziehe die beiden passenden Formen in den Satz.",
+              context: "Wenn die Korrekturen rechtzeitig ___, ___ die Abgabe ohne Verzögerung möglich.",
+              slots: [
+                { id: "first", label: "Verb im Nebensatz" },
+                { id: "second", label: "Verb im Hauptsatz" }
+              ],
+              options: [
+                { id: "o1", label: "eintreffen", detail: "Präsens Plural" },
+                { id: "o2", label: "eintrifft", detail: "falscher Numerus" },
+                { id: "o3", label: "ist", detail: "passende Hauptsatzform" },
+                { id: "o4", label: "wäre", detail: "falscher Modus" }
+              ],
+              correctMap: { first: "o1", second: "o3" },
+              hint: "Prüfe zuerst Numerus und dann den tatsächlichen Aussagecharakter.",
+              solution: "Wenn die Korrekturen rechtzeitig eintreffen, ist die Abgabe ohne Verzögerung möglich.",
+              explanation:
+                "'Die Korrekturen' stehen im Plural und verlangen 'eintreffen'. Der Hauptsatz beschreibt eine reale Folge und bleibt deshalb im Indikativ.",
+              visual: visualVerb("die Korrekturen", "eintreffen / ist", "eintrifft / wäre", "Numerus und Aussageart gemeinsam prüfen")
+            })
+          ]
+        },
+        {
+          id: "rektionen",
+          title: "Rektionen",
+          summary: "Verbale und nominale Rektionen sicher unterscheiden.",
+          tasks: [
+            choice({
+              id: "fg-re-1",
+              title: "Einwände gegen",
+              prompt: "Welche Präposition passt?",
+              context: "Die Arbeitsgruppe erhob mehrere Einwände ___ den ersten Entwurf.",
+              options: [
+                { id: "a", label: "gegen" },
+                { id: "b", label: "zu" },
+                { id: "c", label: "an" },
+                { id: "d", label: "für" }
+              ],
+              correctOptionId: "a",
+              hint: "Suche die feste Rektion des Nomens.",
+              solution: "gegen",
+              explanation:
+                "Die Verbindung lautet 'Einwände gegen etwas erheben'. Andere Präpositionen klingen nahe, sind hier aber unidiomatisch.",
+              visual: visualRektion("Einwände", "gegen den Entwurf", "an den Entwurf", "nominale Rektion korrekt setzen")
+            }),
+            text({
+              id: "fg-re-2",
+              title: "Interesse an",
+              prompt: "Setze die passende Präposition ein.",
+              context: "Die Redaktion zeigte grosses Interesse ___ einer raschen Klärung.",
+              expectedAnswers: ["an"],
+              hint: "Frage dich, welche Präposition zu 'Interesse' gehört.",
+              solution: "an",
+              explanation:
+                "'Interesse' wird mit 'an' verbunden. Darum heisst es 'Interesse an einer raschen Klärung'.",
+              visual: visualRektion("Interesse", "an einer Klärung", "für einer Klärung", "Nomen und Präposition genau verbinden")
+            }),
+            drag({
+              id: "fg-re-3",
+              title: "Zwei Rektionen parallel",
+              prompt: "Ordne die beiden passenden Präpositionen zu.",
+              context: "Der Kommentar weist ___ ein Problem hin und fordert zugleich Respekt ___ der Gegenposition.",
+              slots: [
+                { id: "first", label: "Rektion von 'hinweisen'" },
+                { id: "second", label: "Rektion von 'Respekt'" }
+              ],
+              options: [
+                { id: "o1", label: "auf", detail: "passt zu 'hinweisen'" },
+                { id: "o2", label: "vor", detail: "Distraktor" },
+                { id: "o3", label: "vor", detail: "falsches Feld" },
+                { id: "o4", label: "vor der", detail: "Distraktor" },
+                { id: "o5", label: "gegenüber", detail: "passt zu 'Respekt' nicht" },
+                { id: "o6", label: "vor der Gegenposition", detail: "Distraktor" },
+                { id: "o7", label: "vor", detail: "zweiter Distraktor" },
+                { id: "o8", label: "gegenüber", detail: "präpositionale Alternative" },
+                { id: "o9", label: "vor", detail: "Wiederholungsdistraktor" },
+                { id: "o10", label: "gegenüber der", detail: "passende Form" }
+              ],
+              correctMap: { first: "o1", second: "o10" },
+              hint: "Prüfe beide Wortverbindungen einzeln.",
+              solution:
+                "Der Kommentar weist auf ein Problem hin und fordert zugleich Respekt gegenüber der Gegenposition.",
+              explanation:
+                "'Hinweisen auf' und 'Respekt gegenüber' folgen unterschiedlichen Mustern. Gerade nebeneinander müssen beide Rektionen separat geprüft werden.",
+              visual: visualRektion("hinweisen / Respekt", "auf / gegenüber der", "vor / gegen", "zwei Anschlüsse getrennt sichern")
+            })
+          ]
+        },
+        {
+          id: "diagnose",
+          title: "Diagnose",
+          summary: "Zwischen mehreren plausiblen Fehlerquellen differenzieren.",
+          tasks: [
+            diagnosis({
+              id: "fg-di-1",
+              title: "Bezug oder Rektion?",
+              prompt: "Welche Fehlerart liegt vor, und welche Korrektur passt am besten?",
+              context: "Die Autorin verwies die Redaktion auf, den Begriff genauer zu definieren.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c4",
+              correctionOptions: [
+                { id: "k1", label: "Die Autorin wies die Redaktion darauf hin, den Begriff genauer zu definieren." },
+                { id: "k2", label: "Die Autorin verwies die Redaktion darauf, den Begriff genauer zu definieren." },
+                { id: "k3", label: "Die Autorin verwies die Redaktion auf den Begriff genauer zu definieren." },
+                { id: "k4", label: "Die Autorin wies die Redaktion hin auf, den Begriff genauer zu definieren." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Achte auf die vollständige Verbkonstruktion.",
+              solution:
+                "Fehlerart: Rektion. Korrektur: Die Autorin wies die Redaktion darauf hin, den Begriff genauer zu definieren.",
+              explanation:
+                "Für die Aufforderung mit Infinitivanschluss braucht der Satz die Konstruktion 'auf etwas hinweisen' mit dem Korrelat 'darauf'.",
+              visual: visualRektion("hinweisen", "darauf hin", "auf", "gesamte Rektion mit Korrelat prüfen")
+            }),
+            diagnosis({
+              id: "fg-di-2",
+              title: "Wer erklärte was?",
+              prompt: "Ordne die Fehlerart zu und wähle die beste Korrektur.",
+              context: "Die Referentin erklärte der Moderatorin, dass sie den Ablauf ändern wolle.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c1",
+              correctionOptions: [
+                { id: "k1", label: "Die Referentin erklärte der Moderatorin, dass die Referentin den Ablauf ändern wolle." },
+                { id: "k2", label: "Die Referentin erklärte die Moderatorin, dass sie den Ablauf ändern wolle." },
+                { id: "k3", label: "Die Referentin erklärte der Moderatorin, dass diese den Ablauf ändern wolle." },
+                { id: "k4", label: "Die Referentin erklärte der Moderatorin, den Ablauf ändern wolle." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Achte auf das Pronomen im Nebensatz.",
+              solution:
+                "Fehlerart: Satzbezug. Korrektur: Die Referentin erklärte der Moderatorin, dass die Referentin den Ablauf ändern wolle.",
+              explanation:
+                "Das Pronomen 'sie' bleibt mehrdeutig. Die explizite Wiederholung beseitigt die Unklarheit.",
+              visual: visualBezug("die Referentin", "sie", "die Moderatorin", "gemeinten Bezug ausdrücklich nennen")
+            }),
+            diagnosis({
+              id: "fg-di-3",
+              title: "Kongruenz im Sammelbegriff",
+              prompt: "Bestimme die Fehlerart und wähle die passende Korrektur.",
+              context: "Eine Reihe von Einwänden sprechen gegen die vorgeschlagene Lösung.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c2",
+              correctionOptions: [
+                { id: "k1", label: "Eine Reihe von Einwänden spricht gegen die vorgeschlagene Lösung." },
+                { id: "k2", label: "Eine Reihe von Einwänden sprachen gegen die vorgeschlagene Lösung." },
+                { id: "k3", label: "Eine Reihe von Einwänden sprechen auf die vorgeschlagene Lösung." },
+                { id: "k4", label: "Eine Reihe von Einwänden sei gegen die vorgeschlagene Lösung." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Prüfe den Kopf des Subjekts.",
+              solution:
+                "Fehlerart: Kongruenz. Korrektur: Eine Reihe von Einwänden spricht gegen die vorgeschlagene Lösung.",
+              explanation:
+                "'Eine Reihe' bleibt der Kern des Subjekts und verlangt daher die Singularform 'spricht'.",
+              visual: visualKongruenz("eine Reihe", "spricht", "sprechen", "Sammelbegriff richtig steuern")
+            })
+          ]
+        }
+      ]
+    },
+    {
+      id: "amateur",
+      rank: "04",
+      title: "Amateur",
+      subtitle: "Mit geschultem Blick sortieren",
+      description:
+        "Dieses Level verlangt bereits präzises Prüfen von fast richtigen Formulierungen, bleibt aber noch klar im Übergang zur Oberstufe.",
+      modules: [
+        {
+          id: "satzbezug",
+          title: "Satzbezüge",
+          summary: "Feine, aber noch lösbare Bezugskonflikte entschärfen.",
+          tasks: [
+            choice({
+              id: "am-sb-1",
+              title: "Kommentar oder Bericht?",
+              prompt: "Welche Version stellt klar, dass der Bericht gekürzt wurde?",
+              context: "Der Lektor besprach den Kommentar zum Bericht, bevor er gekürzt wurde.",
+              options: [
+                { id: "a", label: "Der Lektor besprach den Kommentar zum Bericht, bevor der Bericht gekürzt wurde." },
+                { id: "b", label: "Der Lektor besprach den Kommentar zum Bericht, bevor dieser gekürzt wurde." },
+                { id: "c", label: "Der Lektor besprach den Kommentar zum Bericht, bevor jener gekürzt wurde." },
+                { id: "d", label: "Der Lektor besprach den Kommentar zum Bericht, bevor man ihn kürzte." }
+              ],
+              correctOptionId: "a",
+              hint: "Achte auf den Gegenstand der Kürzung.",
+              solution: "Der Lektor besprach den Kommentar zum Bericht, bevor der Bericht gekürzt wurde.",
+              explanation:
+                "Im Ausgangssatz kann 'er' auf Kommentar oder Bericht verweisen. Die eindeutige Fassung nennt den Bericht ausdrücklich.",
+              visual: visualBezug("der Bericht", "er", "der Kommentar", "Bezugswort bei Sachverhalten ausschreiben")
+            }),
+            drag({
+              id: "am-sb-2",
+              title: "Gemeinten Bezug festlegen",
+              prompt: "Ordne den gemeinten und den bloß möglichen Bezug von 'diese' zu.",
+              context:
+                "Die Lehrperson erläuterte der Klasse die Randnotiz zur Aufgabe, weil diese missverstanden worden war.",
+              slots: [
+                { id: "meant", label: "Gemeint mit 'diese'" },
+                { id: "tempting", label: "Formaler Fehlbezug" }
+              ],
+              options: [
+                { id: "o1", label: "die Randnotiz", detail: "gemeinte Bezugsgrösse" },
+                { id: "o2", label: "die Aufgabe", detail: "formal naheliegend" },
+                { id: "o3", label: "die Klasse", detail: "Plural" },
+                { id: "o4", label: "die Lehrperson", detail: "Distraktor" }
+              ],
+              correctMap: { meant: "o1", tempting: "o2" },
+              hint: "Frage dich, was missverstanden worden war.",
+              solution: "Gemeint ist die Randnotiz; die Aufgabe bleibt der formale Fehlbezug.",
+              explanation:
+                "Beide Nominalgruppen sind feminin. Die Satzlogik zeigt jedoch, dass sich das Missverständnis auf die Randnotiz bezieht.",
+              visual: visualBezug("die Randnotiz", "diese", "die Aufgabe", "Satzlogik gegen formale Nähe prüfen")
+            }),
+            text({
+              id: "am-sb-3",
+              title: "Besitzbezug im Plenum",
+              prompt: "Ersetze nur die unklare Stelle so, dass eindeutig die Unterlagen der Gruppe gemeint sind.",
+              context: "Die Kursleiterin legte der Gruppe ihre Unterlagen auf den Tisch.",
+              inputLabel: "Korrigierte Stelle",
+              expectedAnswers: ["die Unterlagen der Gruppe"],
+              acceptedAnswers: ["die Unterlagen der Gruppe", "deren Unterlagen"],
+              hint: "Prüfe, wem die Unterlagen gehören sollen.",
+              solution: "die Unterlagen der Gruppe",
+              explanation:
+                "Das Possessivpronomen 'ihre' kann sich auf die Kursleiterin oder auf die Gruppe beziehen. Die präzisierte Form nennt den Besitzer eindeutig.",
+              visual: visualBezug("die Gruppe", "ihre", "die Kursleiterin", "Besitzbezug nicht offenlassen")
+            })
+          ]
+        },
+        {
+          id: "kongruenz",
+          title: "Satzkongruenz",
+          summary: "Fast plausible, aber falsche Kongruenzmuster erkennen.",
+          tasks: [
+            choice({
+              id: "am-ko-1",
+              title: "Liste im Singular",
+              prompt: "Welche Form passt?",
+              context: "Die Liste der noch offenen Punkte ___ bereits an der Wand.",
+              options: [
+                { id: "a", label: "hängt" },
+                { id: "b", label: "hängen" },
+                { id: "c", label: "hingen" },
+                { id: "d", label: "hänge" }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe den Kern des Subjekts.",
+              solution: "hängt",
+              explanation:
+                "Nicht 'die Punkte', sondern 'die Liste' ist das Subjekt. Deshalb ist die Singularform 'hängt' richtig.",
+              visual: visualKongruenz("die Liste", "hängt", "hängen", "Kernsubjekt statt Genitivergänzung beachten")
+            }),
+            text({
+              id: "am-ko-2",
+              title: "Weder-noch im Singular",
+              prompt: "Setze die richtige Verbform ein.",
+              context: "Weder der Kommentar noch die Einleitung ___ überzeugend formuliert.",
+              expectedAnswers: ["ist"],
+              hint: "Achte auf das nähere Subjekt vor dem Verb.",
+              solution: "ist",
+              explanation:
+                "Das nähere Subjekt 'die Einleitung' wäre feminin Singular, daher bleibt die Verbform im Singular. Hier lautet sie 'ist'.",
+              visual: visualKongruenz("die Einleitung", "ist", "sind", "nahes Singularsubjekt steuert das Verb")
+            }),
+            drag({
+              id: "am-ko-3",
+              title: "Zwei Prädikate abgleichen",
+              prompt: "Ordne die beiden passenden Formen zu.",
+              context:
+                "Der Bericht über die Debatte ___ bereits freigegeben, und auch die ergänzenden Notizen ___ archiviert.",
+              slots: [
+                { id: "first", label: "Verb zum Bericht" },
+                { id: "second", label: "Verb zu den Notizen" }
+              ],
+              options: [
+                { id: "o1", label: "ist", detail: "Singular" },
+                { id: "o2", label: "sind", detail: "Plural" },
+                { id: "o3", label: "war", detail: "falsches Tempus" },
+                { id: "o4", label: "bleiben", detail: "Distraktor" }
+              ],
+              correctMap: { first: "o1", second: "o2" },
+              hint: "Prüfe, welches Subjekt jeweils direkt vorliegt.",
+              solution:
+                "Der Bericht über die Debatte ist bereits freigegeben, und auch die ergänzenden Notizen sind archiviert.",
+              explanation:
+                "'Der Bericht' verlangt Singular, 'die Notizen' Plural. Gerade ähnliche Satzmuster verleiten zu falscher Angleichung.",
+              visual: visualKongruenz("der Bericht / die Notizen", "ist / sind", "ist / ist", "jedes Subjekt einzeln prüfen")
+            })
+          ]
+        },
+        {
+          id: "verbformen",
+          title: "Verbformen",
+          summary: "Verbformen in typischen Unterrichtssituationen sicher korrigieren.",
+          tasks: [
+            choice({
+              id: "am-vf-1",
+              title: "Konjunktiv in Berichtssprache",
+              prompt: "Welche Form passt?",
+              context: "Die Sprecherin betonte, der Schluss ___ missverständlich formuliert.",
+              options: [
+                { id: "a", label: "sei" },
+                { id: "b", label: "ist" },
+                { id: "c", label: "war" },
+                { id: "d", label: "wäre" }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe, ob die Aussage direkt oder indirekt wiedergegeben wird.",
+              solution: "sei",
+              explanation:
+                "Die Form 'sei' zeigt an, dass die Aussage berichtet und nicht als eigene Feststellung präsentiert wird.",
+              visual: visualVerb("berichtete Aussage", "sei", "ist", "indirekte Rede erkennbar machen")
+            }),
+            text({
+              id: "am-vf-2",
+              title: "Zeitlogik im Rückblick",
+              prompt: "Setze die passende Form ein.",
+              context: "Bevor die Korrekturen eintrafen, ___ die Datei schon versandt worden.",
+              expectedAnswers: ["war"],
+              hint: "Welche Handlung lag zeitlich früher?",
+              solution: "war",
+              explanation:
+                "Die Datei war bereits versandt, bevor die Korrekturen ankamen. Daher steht hier die passende Form zum passivischen Plusquamperfekt.",
+              visual: visualVerb("frühere Handlung", "war", "ist", "Zeitfolge sauber abbilden")
+            }),
+            drag({
+              id: "am-vf-3",
+              title: "Bedingung und Auftrag",
+              prompt: "Ziehe die beiden passenden Formen in den Satz.",
+              context: "Wenn die Gruppe mehr Zeit ___, ___ sie den Abschnitt noch einmal überarbeiten.",
+              slots: [
+                { id: "first", label: "Form im Nebensatz" },
+                { id: "second", label: "Form im Hauptsatz" }
+              ],
+              options: [
+                { id: "o1", label: "hätte", detail: "Konjunktiv II" },
+                { id: "o2", label: "hat", detail: "reale Gegenwart" },
+                { id: "o3", label: "könnte", detail: "mögliche Folge" },
+                { id: "o4", label: "kann", detail: "falscher Modus" }
+              ],
+              correctMap: { first: "o1", second: "o3" },
+              hint: "Achte auf den irreal gedachten Fall.",
+              solution: "Wenn die Gruppe mehr Zeit hätte, könnte sie den Abschnitt noch einmal überarbeiten.",
+              explanation:
+                "Der Satz beschreibt eine nicht erfüllte Möglichkeit. Deshalb stehen beide Verbformen im Konjunktiv II.",
+              visual: visualVerb("irrealer Fall", "hätte / könnte", "hat / kann", "Modus konsequent durchhalten")
+            })
+          ]
+        },
+        {
+          id: "rektionen",
+          title: "Rektionen",
+          summary: "Verwechslungsanfällige Rektionen trennscharf einsetzen.",
+          tasks: [
+            choice({
+              id: "am-re-1",
+              title: "Zweifel an",
+              prompt: "Welche Präposition passt?",
+              context: "Mehrere Rückmeldungen weckten Zweifel ___ der bisherigen Deutung.",
+              options: [
+                { id: "a", label: "an" },
+                { id: "b", label: "über" },
+                { id: "c", label: "gegen" },
+                { id: "d", label: "auf" }
+              ],
+              correctOptionId: "a",
+              hint: "Suche die feste Verbindung des Nomens.",
+              solution: "an",
+              explanation:
+                "'Zweifel an etwas' ist die idiomatische Rektion. Andere Präpositionen verändern die Struktur oder wirken unnatürlich.",
+              visual: visualRektion("Zweifel", "an der Deutung", "über der Deutung", "Nomenrektion sicher anwenden")
+            }),
+            text({
+              id: "am-re-2",
+              title: "Bitten um",
+              prompt: "Setze die passende Präposition ein.",
+              context: "Die Gruppe bat die Lehrperson ___ eine kurze Rückmeldung.",
+              expectedAnswers: ["um"],
+              hint: "Frage dich, wie 'bitten' angeschlossen wird.",
+              solution: "um",
+              explanation:
+                "Das Verb 'bitten' verlangt in dieser Bedeutung die Präposition 'um'. Deshalb lautet die Fügung 'um eine Rückmeldung bitten'.",
+              visual: visualRektion("bitten", "um eine Rückmeldung", "für eine Rückmeldung", "Verbrektion korrekt wählen")
+            }),
+            drag({
+              id: "am-re-3",
+              title: "Abhängen von, hinweisen auf",
+              prompt: "Ordne die beiden passenden Präpositionen den Konstruktionen zu.",
+              context: "Das Ergebnis hängt stark ___ der Vorbereitung ab und weist zugleich ___ einen blinden Fleck hin.",
+              slots: [
+                { id: "first", label: "Rektion von 'abhängen'" },
+                { id: "second", label: "Rektion von 'hinweisen'" }
+              ],
+              options: [
+                { id: "o1", label: "von", detail: "passt zu 'abhängen'" },
+                { id: "o2", label: "auf", detail: "passt zu 'hinweisen'" },
+                { id: "o3", label: "an", detail: "Distraktor" },
+                { id: "o4", label: "für", detail: "Distraktor" }
+              ],
+              correctMap: { first: "o1", second: "o2" },
+              hint: "Prüfe jede Konstruktion für sich.",
+              solution:
+                "Das Ergebnis hängt stark von der Vorbereitung ab und weist zugleich auf einen blinden Fleck hin.",
+              explanation:
+                "'Abhängen von' und 'hinweisen auf' sind zwei feste Verbindungen, die leicht vermischt werden.",
+              visual: visualRektion("abhängen / hinweisen", "von / auf", "an / für", "Rektionen nicht vermengen")
+            })
+          ]
+        },
+        {
+          id: "diagnose",
+          title: "Diagnose",
+          summary: "Fast richtige und wirklich richtige Lösungen trennen.",
+          tasks: [
+            diagnosis({
+              id: "am-di-1",
+              title: "Liste oder Punkte?",
+              prompt: "Welche Fehlerart liegt vor, und welche Korrektur ist richtig?",
+              context: "Die Liste der wichtigsten Punkte stehen bereits auf dem Whiteboard.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c2",
+              correctionOptions: [
+                { id: "k1", label: "Die Liste der wichtigsten Punkte steht bereits auf dem Whiteboard." },
+                { id: "k2", label: "Die Liste der wichtigsten Punkte standen bereits auf dem Whiteboard." },
+                { id: "k3", label: "Die Liste der wichtigsten Punkte ist bereits auf dem Whiteboard stehen." },
+                { id: "k4", label: "Die Liste von den wichtigsten Punkten steht bereits auf dem Whiteboard." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Prüfe den Kern des Subjekts.",
+              solution:
+                "Fehlerart: Kongruenz. Korrektur: Die Liste der wichtigsten Punkte steht bereits auf dem Whiteboard.",
+              explanation:
+                "Der Kern des Subjekts ist 'die Liste'. Daher muss die Verbform im Singular stehen.",
+              visual: visualKongruenz("die Liste", "steht", "stehen", "Kernsubjekt und Verb abstimmen")
+            }),
+            diagnosis({
+              id: "am-di-2",
+              title: "Bezug im Nebensatz",
+              prompt: "Ordne die Fehlerart zu und wähle die beste Korrektur.",
+              context: "Die Betreuerin sagte der Gruppe, dass sie den Abschnitt straffen solle.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c1",
+              correctionOptions: [
+                { id: "k1", label: "Die Betreuerin sagte der Gruppe, dass die Gruppe den Abschnitt straffen solle." },
+                { id: "k2", label: "Die Betreuerin sagte die Gruppe, dass sie den Abschnitt straffen solle." },
+                { id: "k3", label: "Die Betreuerin sagte der Gruppe, dass jene den Abschnitt straffen solle." },
+                { id: "k4", label: "Die Betreuerin sagte der Gruppe den Abschnitt straffen solle." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Achte darauf, wer den Auftrag ausführen soll.",
+              solution:
+                "Fehlerart: Satzbezug. Korrektur: Die Betreuerin sagte der Gruppe, dass die Gruppe den Abschnitt straffen solle.",
+              explanation:
+                "Das Pronomen 'sie' ist mehrdeutig. Erst die explizite Nennung der Gruppe stellt den Auftrag klar.",
+              visual: visualBezug("die Gruppe", "sie", "die Betreuerin", "Adressat und Handelnde trennen")
+            }),
+            diagnosis({
+              id: "am-di-3",
+              title: "Rektion bei 'bestehen'",
+              prompt: "Bestimme die Fehlerart und die passende Korrektur.",
+              context: "Die Autorin bestand an einer präziseren Formulierung.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c4",
+              correctionOptions: [
+                { id: "k1", label: "Die Autorin bestand auf einer präziseren Formulierung." },
+                { id: "k2", label: "Die Autorin bestand in einer präziseren Formulierung." },
+                { id: "k3", label: "Die Autorin bestand eine präzisere Formulierung." },
+                { id: "k4", label: "Die Autorin bestand für einer präziseren Formulierung." }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Frage dich, welche Präposition das Verb verlangt.",
+              solution:
+                "Fehlerart: Rektion. Korrektur: Die Autorin bestand auf einer präziseren Formulierung.",
+              explanation:
+                "Die feste Verbindung lautet 'auf etwas bestehen'. Genau diese Präposition trägt die Bedeutung des Beharrens.",
+              visual: visualRektion("bestehen", "auf einer Formulierung", "an einer Formulierung", "feste Präposition des Verbs prüfen")
+            })
+          ]
+        }
+      ]
+    },
+    {
+      id: "profi",
+      rank: "05",
       title: "Profi",
       subtitle: "Komplexe Strukturen sicher durchdringen",
       description:
@@ -1115,7 +1812,7 @@
     },
     {
       id: "experte",
-      rank: "04",
+      rank: "06",
       title: "Experte",
       subtitle: "Feine Fehlerquellen trennen",
       description:
@@ -1466,10 +2163,10 @@
       ]
     },
     {
-      id: "neue-deutschlehrperson",
-      rank: "05",
-      title: "Neue Deutschlehrperson",
-      subtitle: "Spitzfindige Grenzfälle begründen",
+      id: "grammatik-pro",
+      rank: "07",
+      title: "Grammatik-Pro",
+      subtitle: "Grenzfälle fachlich begründen",
       description:
         "Sehr feine Aufgaben mit Mehrdeutigkeiten, Grenzfällen und fachlich anspruchsvollen Rektionen und Bezügen.",
       modules: [
@@ -1860,6 +2557,406 @@
               explanation:
                 "Die feste Verbindung lautet 'Hinweis auf etwas'. Gerade bei nominalen Rektionen wirken falsche Präpositionen oft fast plausibel.",
               visual: visualRektion("Hinweis", "auf eine Verschleierung", "für eine Verschleierung", "Nominalrektion auch im Grenzfall sichern")
+            })
+          ]
+        }
+      ]
+    },
+    {
+      id: "adlerauge",
+      rank: "08",
+      title: "Adlerauge",
+      subtitle: "Subtilste Fehler bis ins Detail erkennen",
+      description:
+        "Das höchste Level bündelt Grenzfälle, nahezu plausible Fehlformen und besonders heikle Anschluss-, Kongruenz- und Rektionentscheidungen.",
+      modules: [
+        {
+          id: "satzbezug",
+          title: "Satzbezüge",
+          summary: "Minimal unterschiedliche Lesarten sicher voneinander trennen.",
+          tasks: [
+            choice({
+              id: "ad-sb-1",
+              title: "Stellungnahme oder Einordnung?",
+              prompt: "Welche Fassung macht fachlich präzise klar, dass die Einordnung überarbeitet wurde?",
+              context:
+                "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem diese überarbeitet worden war.",
+              options: [
+                {
+                  id: "a",
+                  label: "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem die Einordnung überarbeitet worden war."
+                },
+                {
+                  id: "b",
+                  label: "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem diese Kommission überarbeitet worden war."
+                },
+                {
+                  id: "c",
+                  label: "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem jene überarbeitet worden war."
+                },
+                {
+                  id: "d",
+                  label: "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem sie überarbeitet worden war."
+                }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe, welches Element semantisch überhaupt überarbeitet werden kann.",
+              solution:
+                "Die Stellungnahme zum Gutachten der Kommission wurde erst zitiert, nachdem die Einordnung überarbeitet worden war.",
+              explanation:
+                "Das Pronomen 'diese' eröffnet mehrere formal mögliche Bezüge. Fachlich sauber ist nur eine Fassung, die den überarbeiteten Gegenstand ausdrücklich nennt.",
+              visual: visualBezug("die Einordnung", "diese", "die Kommission", "semantisch möglichen Bezug ausdrücklich nennen")
+            }),
+            drag({
+              id: "ad-sb-2",
+              title: "Logik gegen Nähe",
+              prompt: "Ordne den gemeinten und den formal näheren, aber falschen Bezug zu.",
+              context:
+                "Dass die Leiterin der Prüfungsstelle der Referentin schrieb, nachdem sie die Passage noch einmal gegeneinander abgewogen hatte, blieb selbst im Nachtrag unklar.",
+              slots: [
+                { id: "meant", label: "Gemeint mit 'sie'" },
+                { id: "tempting", label: "Formal näher, aber falsch" }
+              ],
+              options: [
+                { id: "o1", label: "die Leiterin der Prüfungsstelle", detail: "gemeinte Person" },
+                { id: "o2", label: "die Referentin", detail: "naheliegender Fehlbezug" },
+                { id: "o3", label: "die Passage", detail: "Sachwort" },
+                { id: "o4", label: "der Nachtrag", detail: "Distraktor" }
+              ],
+              correctMap: { meant: "o1", tempting: "o2" },
+              hint: "Trenne grammatische Nähe und verantwortete Handlung.",
+              solution: "Gemeint ist die Leiterin der Prüfungsstelle; die Referentin bleibt der formale Fehlbezug.",
+              explanation:
+                "Gerade auf diesem Niveau entstehen Fehler nicht aus grober Unkenntnis, sondern aus einem zu schnellen Anschluss an das nähere Wort.",
+              visual: visualBezug("die Leiterin der Prüfungsstelle", "sie", "die Referentin", "logischen Bezug gegen formale Nähe verteidigen")
+            }),
+            text({
+              id: "ad-sb-3",
+              title: "Relativsatz im Grenzfall",
+              prompt: "Ersetze nur den problematischen Relativanschluss so, dass sich der Satz eindeutig auf das Resümee bezieht.",
+              context: "Die Redaktion verwarf die Schlussbemerkung zum Resümee, die erneut präzisiert werden müsse.",
+              inputLabel: "Korrigierter Anschluss",
+              expectedAnswers: ["das erneut präzisiert werden müsse"],
+              acceptedAnswers: [
+                "das erneut präzisiert werden müsse",
+                "wobei das Resümee erneut präzisiert werden müsse"
+              ],
+              hint: "Frage dich, welcher Ausdruck tatsächlich präzisiert werden soll.",
+              solution: "das erneut präzisiert werden müsse",
+              explanation:
+                "Wenn das Resümee gemeint ist, darf der Relativsatz nicht an 'die Schlussbemerkung' angeschlossen werden. Die neutrale Form richtet den Bezug auf das Resümee.",
+              visual: visualBezug("das Resümee", "das", "die Schlussbemerkung", "Relativanschluss semantisch justieren")
+            })
+          ]
+        },
+        {
+          id: "kongruenz",
+          title: "Satzkongruenz",
+          summary: "Kongruenz auch in stark verschachtelten Kontrast- und Sammelformen sichern.",
+          tasks: [
+            choice({
+              id: "ad-ko-1",
+              title: "Nachtrag statt Materialien",
+              prompt: "Welche Verbform ist hier fachlich präzise?",
+              context:
+                "Nicht die in den Anlagen mehrfach erwähnten Materialien, sondern der Nachtrag zum methodischen Einwand ___ schliesslich ausschlaggebend gewesen.",
+              options: [
+                { id: "a", label: "ist" },
+                { id: "b", label: "sind" },
+                { id: "c", label: "war" },
+                { id: "d", label: "waren" }
+              ],
+              correctOptionId: "c",
+              hint: "Achte zugleich auf Tempus und auf das ersetzende Subjekt.",
+              solution: "war",
+              explanation:
+                "Entscheidend ist das Singularsubjekt 'der Nachtrag'. Da rückblickend berichtet wird, ist zudem das Präteritum 'war' angemessen.",
+              visual: visualKongruenz("der Nachtrag", "war", "waren", "Kontrastsubjekt und Tempus gemeinsam prüfen")
+            }),
+            text({
+              id: "ad-ko-2",
+              title: "Weder-noch mit Distanz",
+              prompt: "Setze die korrekte Verbform ein.",
+              context:
+                "Weder die in Fussnoten ausgelagerte Begründung noch das später eingefügte Gegenargument ___ im Wortlaut stimmig gewesen.",
+              expectedAnswers: ["ist"],
+              hint: "Prüfe das nähere Subjekt unmittelbar vor dem Verb.",
+              solution: "ist",
+              explanation:
+                "Das nähere Subjekt 'das ... Gegenargument' steht im Singular. Deshalb lautet die Verbform hier 'ist'.",
+              visual: visualKongruenz("das Gegenargument", "ist", "sind", "nahes Singularsubjekt trotz langer Distanz")
+            }),
+            drag({
+              id: "ad-ko-3",
+              title: "Kollektiv, Zusatz und Einzelhinweis",
+              prompt: "Ordne die beiden passenden Verbformen zu.",
+              context:
+                "Eine Vielzahl von Einwänden aus den Randspalten ___ im Kommentar berücksichtigt; der entscheidende Verweis auf die Begriffsgrenze ___ jedoch unerwähnt geblieben.",
+              slots: [
+                { id: "first", label: "Verb zur Vielzahl" },
+                { id: "second", label: "Verb zum Verweis" }
+              ],
+              options: [
+                { id: "o1", label: "ist", detail: "Singular" },
+                { id: "o2", label: "sind", detail: "Plural" },
+                { id: "o3", label: "ist", detail: "zweite Singularform" },
+                { id: "o4", label: "waren", detail: "Distraktor" }
+              ],
+              correctMap: { first: "o1", second: "o3" },
+              hint: "Lass dich nicht von pluralischen Ergänzungen täuschen.",
+              solution:
+                "Eine Vielzahl von Einwänden aus den Randspalten ist im Kommentar berücksichtigt; der entscheidende Verweis auf die Begriffsgrenze ist jedoch unerwähnt geblieben.",
+              explanation:
+                "Sowohl 'eine Vielzahl' als auch 'der Verweis' sind Singularsubjekte. Pluralische Zusätze dürfen die Kongruenz nicht überlagern.",
+              visual: visualKongruenz("eine Vielzahl / der Verweis", "ist / ist", "sind / waren", "Sammelbegriff und Kernsubjekt trennen")
+            })
+          ]
+        },
+        {
+          id: "verbformen",
+          title: "Verbformen",
+          summary: "Irreale, berichtete und zeitlich gestufte Formen ohne Hilfssignale prüfen.",
+          tasks: [
+            choice({
+              id: "ad-vf-1",
+              title: "Irreale Folgerung",
+              prompt: "Welche Form passt in den Satz?",
+              context:
+                "Wären die Anmerkungen vor der Endredaktion ernst genommen worden, ___ der spätere Einwand wohl entfallen.",
+              options: [
+                { id: "a", label: "wäre" },
+                { id: "b", label: "sei" },
+                { id: "c", label: "ist" },
+                { id: "d", label: "war" }
+              ],
+              correctOptionId: "a",
+              hint: "Prüfe den Modus der gedachten Folge.",
+              solution: "wäre",
+              explanation:
+                "Der Bedingungssatz ist irreal. Die Folge wird darum mit dem Konjunktiv II Vergangenheit 'wäre ... entfallen' ausgedrückt.",
+              visual: visualVerb("irreale Folge", "wäre", "ist", "Konjunktiv II konsequent halten")
+            }),
+            text({
+              id: "ad-vf-2",
+              title: "Berichtete Bewertung",
+              prompt: "Setze die passende Form ein.",
+              context:
+                "Die Fachkommission hielt fest, der abschliessende Vergleich ___ in dieser Form sachlich nicht tragfähig.",
+              expectedAnswers: ["sei"],
+              hint: "Achte auf die Distanz in der berichteten Bewertung.",
+              solution: "sei",
+              explanation:
+                "Die Beurteilung wird nicht direkt behauptet, sondern referiert. Darum ist der Konjunktiv I 'sei' die präzise Form.",
+              visual: visualVerb("berichtete Bewertung", "sei", "ist", "Konjunktiv I als Distanzsignal")
+            }),
+            drag({
+              id: "ad-vf-3",
+              title: "Vorzeitigkeit und irreale Konsequenz",
+              prompt: "Ziehe die passenden Formen in die beiden Lücken.",
+              context:
+                "Nachdem die Redaktion den Einwand noch einmal ___, ___ sie die ältere Fassung kaum beibehalten können.",
+              slots: [
+                { id: "first", label: "Form im Nebensatz" },
+                { id: "second", label: "Form im Hauptsatz" }
+              ],
+              options: [
+                { id: "o1", label: "geprüft hatte", detail: "Vorzeitigkeit" },
+                { id: "o2", label: "geprüft hat", detail: "zu wenig Vorzeitigkeit" },
+                { id: "o3", label: "hätte", detail: "irreale Konsequenz" },
+                { id: "o4", label: "hatte", detail: "falscher Modus" }
+              ],
+              correctMap: { first: "o1", second: "o3" },
+              hint: "Trenne tatsächliche Vorzeitigkeit und gedachte Folge.",
+              solution:
+                "Nachdem die Redaktion den Einwand noch einmal geprüft hatte, hätte sie die ältere Fassung kaum beibehalten können.",
+              explanation:
+                "Die Prüfung liegt zeitlich vor der Bewertung der hypothetischen Folge. Deshalb stehen Plusquamperfekt und Konjunktiv II Vergangenheit nebeneinander.",
+              visual: visualVerb("Vorzeitigkeit + Irrealität", "geprüft hatte / hätte", "geprüft hat / hatte", "Zeit- und Moduslogik zusammen prüfen")
+            })
+          ]
+        },
+        {
+          id: "rektionen",
+          title: "Rektionen",
+          summary: "Besonders heikle Rektionen mit beinahe plausiblen Alternativen entscheiden.",
+          tasks: [
+            choice({
+              id: "ad-re-1",
+              title: "Anlass zu",
+              prompt: "Welche Präposition passt?",
+              context: "Die Formulierung gab Anlass ___ einer erneuten Präzisierung.",
+              options: [
+                { id: "a", label: "zu" },
+                { id: "b", label: "für" },
+                { id: "c", label: "auf" },
+                { id: "d", label: "an" }
+              ],
+              correctOptionId: "a",
+              hint: "Suche die feste Verbindung des Nomens.",
+              solution: "zu",
+              explanation:
+                "Die feste Verbindung lautet 'Anlass zu etwas geben'. Gerade 'für' wirkt plausibel, ist hier aber nicht idiomatisch.",
+              visual: visualRektion("Anlass", "zu einer Präzisierung", "für einer Präzisierung", "Nominalrektion fein unterscheiden")
+            }),
+            text({
+              id: "ad-re-2",
+              title: "Abgrenzung von",
+              prompt: "Setze die passende Präposition ein.",
+              context: "Der Kommentar lebt von einer klaren Abgrenzung ___ bloss assoziativen Lesarten.",
+              expectedAnswers: ["von"],
+              hint: "Prüfe die typische Präposition des Nomens 'Abgrenzung'.",
+              solution: "von",
+              explanation:
+                "'Abgrenzung von etwas' ist die geläufige nominale Rektion. Sie markiert, wovon sich der Begriff trennt.",
+              visual: visualRektion("Abgrenzung", "von Lesarten", "gegen Lesarten", "Nomenrektion nicht verwechseln")
+            }),
+            drag({
+              id: "ad-re-3",
+              title: "Appell und Verweis im Grenzfall",
+              prompt: "Ordne die beiden passenden Präpositionen den Konstruktionen zu.",
+              context:
+                "Die Stellungnahme enthält einen Appell ___ grössere Präzision und einen deutlichen Verweis ___ die Grenzen der bisherigen Deutung.",
+              slots: [
+                { id: "first", label: "Rektion von 'Appell'" },
+                { id: "second", label: "Rektion von 'Verweis'" }
+              ],
+              options: [
+                { id: "o1", label: "an", detail: "passt zu 'Appell'" },
+                { id: "o2", label: "auf", detail: "passt zu 'Verweis'" },
+                { id: "o3", label: "für", detail: "Distraktor" },
+                { id: "o4", label: "gegen", detail: "Distraktor" }
+              ],
+              correctMap: { first: "o1", second: "o2" },
+              hint: "Prüfe beide nominalen Anschlüsse getrennt.",
+              solution:
+                "Die Stellungnahme enthält einen Appell an grössere Präzision und einen deutlichen Verweis auf die Grenzen der bisherigen Deutung.",
+              explanation:
+                "'Appell an' und 'Verweis auf' sind nahe beieinander, aber nicht austauschbar. Hier entscheidet die feste Nominalrektion.",
+              visual: visualRektion("Appell / Verweis", "an / auf", "für / gegen", "nominale Rektionen präzise sortieren")
+            })
+          ]
+        },
+        {
+          id: "diagnose",
+          title: "Diagnose",
+          summary: "Fast korrekte Sätze fachlich exakt einordnen und korrigieren.",
+          tasks: [
+            diagnosis({
+              id: "ad-di-1",
+              title: "Berichtete Bewertung oder Indikativ?",
+              prompt: "Bestimme die Fehlerart und wähle die fachlich präziseste Korrektur.",
+              context:
+                "Die Fachgruppe hielt fest, der letzte Abschnitt ist in seiner jetzigen Form weder logisch sauber noch begrifflich präzise.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c3",
+              correctionOptions: [
+                {
+                  id: "k1",
+                  label: "Die Fachgruppe hielt fest, der letzte Abschnitt sei in seiner jetzigen Form weder logisch sauber noch begrifflich präzise."
+                },
+                {
+                  id: "k2",
+                  label: "Die Fachgruppe hielt fest, der letzte Abschnitt wäre in seiner jetzigen Form weder logisch sauber noch begrifflich präzise."
+                },
+                {
+                  id: "k3",
+                  label: "Die Fachgruppe hielt fest, der letzte Abschnitt seien in seiner jetzigen Form weder logisch sauber noch begrifflich präzise."
+                },
+                {
+                  id: "k4",
+                  label: "Die Fachgruppe hielt fest, dass der letzte Abschnitt sei in seiner jetzigen Form weder logisch sauber noch begrifflich präzise."
+                }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Prüfe den Modus der berichteten Aussage.",
+              solution:
+                "Fehlerart: Verbform. Korrektur: Die Fachgruppe hielt fest, der letzte Abschnitt sei in seiner jetzigen Form weder logisch sauber noch begrifflich präzise.",
+              explanation:
+                "Die Aussage wird als Feststellung der Fachgruppe wiedergegeben. Dafür ist der Konjunktiv I 'sei' die präziseste Form.",
+              visual: visualVerb("berichtete Aussage", "sei", "ist", "Indikativ nicht ungeprüft übernehmen")
+            }),
+            diagnosis({
+              id: "ad-di-2",
+              title: "Zusatz oder Kernsubjekt?",
+              prompt: "Ordne die Fehlerart zu und wähle die richtige Korrektur.",
+              context:
+                "Die Summe der in den Kommentaren aufgeworfenen Fragen sprechen gegen eine vorschnelle Entscheidung.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c2",
+              correctionOptions: [
+                {
+                  id: "k1",
+                  label: "Die Summe der in den Kommentaren aufgeworfenen Fragen spricht gegen eine vorschnelle Entscheidung."
+                },
+                {
+                  id: "k2",
+                  label: "Die Summe der in den Kommentaren aufgeworfenen Fragen sprachen gegen eine vorschnelle Entscheidung."
+                },
+                {
+                  id: "k3",
+                  label: "Die Summe der in den Kommentaren aufgeworfenen Fragen spreche gegen eine vorschnelle Entscheidung."
+                },
+                {
+                  id: "k4",
+                  label: "Die Summe von den in den Kommentaren aufgeworfenen Fragen spricht gegen eine vorschnelle Entscheidung."
+                }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Prüfe, welcher Ausdruck im Subjekt tatsächlich den Kopf bildet.",
+              solution:
+                "Fehlerart: Kongruenz. Korrektur: Die Summe der in den Kommentaren aufgeworfenen Fragen spricht gegen eine vorschnelle Entscheidung.",
+              explanation:
+                "Kopf des Subjekts ist 'die Summe', also Singular. Der lange Genitivzusatz darf die Verbform nicht in den Plural ziehen.",
+              visual: visualKongruenz("die Summe", "spricht", "sprechen", "Kopf der Nominalgruppe trotz Distanz erkennen")
+            }),
+            diagnosis({
+              id: "ad-di-3",
+              title: "Hinweis auf oder für?",
+              prompt: "Bestimme die Fehlerart und wähle die fachlich beste Korrektur.",
+              context:
+                "Der Abschnitt enthält keinen Hinweis für eine absichtliche Verschiebung der Begriffe, lässt aber Raum für Irritationen.",
+              categoryOptions: [
+                { id: "c1", label: "Satzbezug" },
+                { id: "c2", label: "Kongruenz" },
+                { id: "c3", label: "Verbform" },
+                { id: "c4", label: "Rektion" }
+              ],
+              correctCategoryId: "c4",
+              correctionOptions: [
+                {
+                  id: "k1",
+                  label: "Der Abschnitt enthält keinen Hinweis auf eine absichtliche Verschiebung der Begriffe, lässt aber Raum für Irritationen."
+                },
+                {
+                  id: "k2",
+                  label: "Der Abschnitt enthält keinen Hinweis an eine absichtliche Verschiebung der Begriffe, lässt aber Raum für Irritationen."
+                },
+                {
+                  id: "k3",
+                  label: "Der Abschnitt enthält keinen Hinweis für eine absichtliche Verschiebung der Begriffe, lässt aber Raum auf Irritationen."
+                },
+                {
+                  id: "k4",
+                  label: "Der Abschnitt enthält keinen Hinweis zu eine absichtliche Verschiebung der Begriffe, lässt aber Raum für Irritationen."
+                }
+              ],
+              correctCorrectionId: "k1",
+              hint: "Achte auf die präzise Präposition des Nomens 'Hinweis'.",
+              solution:
+                "Fehlerart: Rektion. Korrektur: Der Abschnitt enthält keinen Hinweis auf eine absichtliche Verschiebung der Begriffe, lässt aber Raum für Irritationen.",
+              explanation:
+                "Die feste Verbindung lautet 'Hinweis auf etwas'. Genau diese Präposition macht deutlich, worauf der Text hindeutet oder eben nicht hindeutet.",
+              visual: visualRektion("Hinweis", "auf eine Verschiebung", "für eine Verschiebung", "nominale Präposition fein entscheiden")
             })
           ]
         }

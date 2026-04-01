@@ -35,9 +35,17 @@
         const progress = storageApi.getLevelProgress(state, level.id);
         const donePercent = progress.total === 0 ? 0 : Math.round((progress.completed / progress.total) * 100);
         const reviewDisabled = progress.wrong === 0 ? "disabled" : "";
+        const thumbnailPath = "assets/images/levels/" + level.id + ".svg";
 
         return (
           '<article class="level-card">' +
+          '<div class="level-thumbnail-wrap">' +
+          '<img class="level-thumbnail" src="' +
+          escapeHtml(thumbnailPath) +
+          '" alt="' +
+          escapeHtml("Thumbnail für " + level.title) +
+          '" loading="lazy">' +
+          "</div>" +
           '<div class="level-head">' +
           "<div>" +
           "<p class=\"section-label\">Level " +

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Thumbnail Profi</title>
+  <desc id="desc">Dichte Struktur mit Raster, Verbindungen und übergreifenden Linien.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ece5d7"/>
+      <stop offset="100%" stop-color="#c9d4d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" rx="36" fill="url(#bg)"/>
+  <rect x="94" y="92" width="1012" height="491" rx="30" fill="#fffaf3" stroke="#cdd5d8"/>
+  <g opacity=".45">
+    <path d="M180 150V516" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M360 150V516" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M540 150V516" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M720 150V516" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M900 150V516" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M150 190H1050" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M150 310H1050" stroke="#c5d0d5" stroke-width="2"/>
+    <path d="M150 430H1050" stroke="#c5d0d5" stroke-width="2"/>
+  </g>
+  <circle cx="270" cy="250" r="26" fill="#22577a"/>
+  <circle cx="530" cy="206" r="26" fill="#2f8f57"/>
+  <circle cx="782" cy="288" r="26" fill="#c56a30"/>
+  <circle cx="942" cy="208" r="26" fill="#7d3e21"/>
+  <path d="M296 250C364 250 448 230 504 214" fill="none" stroke="#22577a" stroke-width="10" stroke-linecap="round"/>
+  <path d="M556 206C638 206 704 242 756 278" fill="none" stroke="#2f8f57" stroke-width="10" stroke-linecap="round"/>
+  <path d="M808 288C850 268 898 236 916 218" fill="none" stroke="#c56a30" stroke-width="10" stroke-linecap="round"/>
+  <rect x="170" y="470" width="246" height="52" rx="15" fill="#ddeaf4"/>
+  <rect x="438" y="470" width="190" height="52" rx="15" fill="#e7f1df"/>
+  <rect x="650" y="470" width="218" height="52" rx="15" fill="#f4e7d9"/>
+  <text x="150" y="158" fill="#7d3e21" font-size="64" font-family="Georgia, serif">Profi</text>
+  <text x="150" y="208" fill="#5d6468" font-size="28" font-family="Avenir Next, Arial, sans-serif">vernetzte Problemzonen · klare Systematik</text>
+</svg>
