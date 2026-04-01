@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammatikwerkstatt Deutsch</title>
+  <meta
+    name="description"
+    content="Interaktive Übungseinheit zu Satzbezügen, Satzkongruenz, Verbformen und Rektionen im Deutschen."
+  >
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="page-glow page-glow-a"></div>
+  <div class="page-glow page-glow-b"></div>
+
+  <div class="app-shell">
+    <header class="hero-panel surface">
+      <div class="hero-copy">
+        <p class="eyebrow">Interaktive Übungseinheit für GitHub Pages</p>
+        <h1>Grammatikwerkstatt Deutsch</h1>
+        <p class="hero-lead">
+          Diese Lernumgebung trainiert fehlerhafte Satzbezüge, Satzkongruenz, Verbformen und
+          Rektionen in fünf klar getrennten Schwierigkeitsstufen. Jede Aufgabe arbeitet mit
+          gestufter Rückmeldung, speichert Fortschritte lokal und eignet sich direkt für den
+          Einsatz im Unterricht oder im Selbststudium.
+        </p>
+        <div class="hero-tags">
+          <span>5 Levels</span>
+          <span>25 Module</span>
+          <span>75 Aufgaben</span>
+          <span>lokaler Fortschritt</span>
+          <span>Trainingsmodus</span>
+        </div>
+      </div>
+
+      <aside class="hero-aside surface-inset">
+        <h2>Didaktische Leitplanken</h2>
+        <ul class="feature-list">
+          <li>dreistufige Fehlerlogik mit gestaffelten Hinweisen</li>
+          <li>gleichwertige Optionen ohne verräterische UI-Muster</li>
+          <li>Wiederholung falsch gelöster Aufgaben pro Level</li>
+          <li>Abschlussseiten mit Zeit- und Lernstandsübersicht</li>
+        </ul>
+      </aside>
+    </header>
+
+    <main>
+      <section id="dashboardView" class="view-stack">
+        <div class="overview-grid">
+          <section class="surface metrics-panel">
+            <div class="section-head">
+              <div>
+                <p class="section-label">Übersicht</p>
+                <h2>Fortschritt und Lernzeit</h2>
+              </div>
+              <button id="resetAllButton" class="button button-ghost" type="button">Alles zurücksetzen</button>
+            </div>
+
+            <div class="metric-row" id="overviewMetrics"></div>
+
+            <div class="meter-block">
+              <div class="meter-head">
+                <span>Gesamtfortschritt</span>
+                <strong id="overallProgressText">0 / 75 Aufgaben</strong>
+              </div>
+              <div class="meter-track">
+                <div id="overallProgressBar" class="meter-fill"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="surface modes-panel">
+            <div class="section-head">
+              <div>
+                <p class="section-label">Lernmodi</p>
+                <h2>Direkt einsteigen</h2>
+              </div>
+            </div>
+
+            <div class="mode-actions">
+              <button id="mixedTrainingButton" class="button button-primary" type="button">Gemischtes Training starten</button>
+              <button id="continueButton" class="button button-secondary" type="button">Zuletzt besuchtes Level fortsetzen</button>
+            </div>
+
+            <p class="modes-note">
+              Der Wiederholungsmodus für falsch gelöste Aufgaben steht auf jeder Levelkarte nur dann
+              bereit, wenn bereits Aufgaben offen geblieben sind.
+            </p>
+          </section>
+        </div>
+
+        <section class="surface">
+          <div class="section-head">
+            <div>
+              <p class="section-label">Levels</p>
+              <h2>Schwierigkeitsstufen und Module</h2>
+            </div>
+          </div>
+          <div id="levelGrid" class="level-grid"></div>
+        </section>
+      </section>
+
+      <section id="sessionView" class="view-stack" hidden>
+        <div class="session-topbar">
+          <button id="backToDashboardButton" class="button button-ghost" type="button">Zur Übersicht</button>
+          <div class="session-badges">
+            <span id="sessionModeBadge" class="badge badge-outline"></span>
+            <span id="sessionTypeBadge" class="badge badge-outline"></span>
+          </div>
+        </div>
+
+        <div class="session-layout">
+          <aside class="surface session-side">
+            <div class="section-head compact">
+              <div>
+                <p class="section-label">Aktuelle Sitzung</p>
+                <h2 id="sessionLevelName">Level</h2>
+              </div>
+            </div>
+
+            <div class="status-stack">
+              <div class="status-card surface-inset">
+                <span class="status-label">Modul</span>
+                <strong id="sessionModuleName">-</strong>
+              </div>
+              <div class="status-card surface-inset">
+                <span class="status-label">Aufgabentyp</span>
+                <strong id="sessionTaskType">-</strong>
+              </div>
+              <div class="status-card surface-inset">
+                <span class="status-label">Zeit</span>
+                <strong id="sessionTimer">00:00</strong>
+              </div>
+              <div class="status-card surface-inset">
+                <span class="status-label">Falsch gelöst</span>
+                <strong id="sessionWrongCount">0</strong>
+              </div>
+            </div>
+
+            <div class="meter-block">
+              <div class="meter-head">
+                <span>Aufgabenfortschritt</span>
+                <strong id="sessionProgressText">0 / 0</strong>
+              </div>
+              <div class="meter-track">
+                <div id="sessionProgressBar" class="meter-fill"></div>
+              </div>
+            </div>
+
+            <div class="meter-block">
+              <div class="meter-head">
+                <span>Levelfortschritt</span>
+                <strong id="levelProgressText">0%</strong>
+              </div>
+              <div class="meter-track cool">
+                <div id="levelProgressBar" class="meter-fill"></div>
+              </div>
+            </div>
+
+            <div id="moduleOverview" class="module-overview"></div>
+          </aside>
+
+          <section class="surface task-panel">
+            <div class="task-header">
+              <div>
+                <p id="taskEyebrow" class="section-label">Aufgabe</p>
+                <h2 id="taskTitle">-</h2>
+              </div>
+              <span id="attemptBadge" class="badge badge-warning">Versuch 1 von 3</span>
+            </div>
+
+            <p id="taskPrompt" class="task-prompt"></p>
+            <div id="taskContext" class="task-context" hidden></div>
+            <div id="taskWorkspace" class="task-workspace"></div>
+
+            <section id="feedbackPanel" class="feedback-panel" hidden></section>
+
+            <div class="control-row">
+              <button id="checkButton" class="button button-primary" type="button">Prüfen</button>
+              <button id="resetButton" class="button button-ghost" type="button">Zurücksetzen</button>
+              <button id="retryButton" class="button button-secondary" type="button">Wiederholen</button>
+              <button id="nextButton" class="button button-primary" type="button" disabled>Nächste Aufgabe</button>
+              <button id="restartLevelButton" class="button button-ghost" type="button">Level neu starten</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="levelCompleteView" class="view-stack" hidden>
+        <section class="surface completion-panel">
+          <p class="eyebrow">Abschnitt abgeschlossen</p>
+          <h2 id="completionTitle">Level abgeschlossen</h2>
+          <p id="completionLead" class="hero-lead completion-lead"></p>
+
+          <div id="completionMetrics" class="metric-row"></div>
+
+          <div class="completion-actions">
+            <button id="completionReviewButton" class="button button-secondary" type="button">Falsch gelöste Aufgaben trainieren</button>
+            <button id="completionReplayButton" class="button button-ghost" type="button">Level neu starten</button>
+            <button id="completionMixedButton" class="button button-primary" type="button">Gemischtes Training</button>
+            <button id="completionDashboardButton" class="button button-ghost" type="button">Zur Übersicht</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <script defer src="assets/js/data.js"></script>
+  <script defer src="assets/js/storage.js"></script>
+  <script defer src="assets/js/feedback.js"></script>
+  <script defer src="assets/js/ui.js"></script>
+  <script defer src="assets/js/app.js"></script>
+</body>
+</html>
